@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "59298860256",
+    "project_id": "transporte-escolar-59a20",
+    "storage_bucket": "transporte-escolar-59a20.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:59298860256:android:cda2766c74be15f0f31485",
+        "android_client_info": {
+          "package_name": "com.waldirdev01.transporte_escolar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoAvLMpK_wnkhK3VzHQZrVMp-nd9wwICA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

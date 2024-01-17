@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyBl_i8MWO36VwdWqydYgIt2aMIlh3D0rFM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>59298860256</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.waldirdev01.transporteEscolar.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>transporte-escolar-59a20</string>
+	<key>STORAGE_BUCKET</key>
+	<string>transporte-escolar-59a20.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:59298860256:ios:efc2a5187aa593d6f31485</string>
+</dict>
+</plist>
