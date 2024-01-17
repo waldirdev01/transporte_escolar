@@ -3,7 +3,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:transporte_escolar/app/core/firebase_database/user_database/user_database.dart';
+import 'package:transporte_escolar/app/core/ui/messages.dart';
 import 'package:transporte_escolar/app/models/app_user.dart';
 import 'package:transporte_escolar/app/providers/user/app_user_provider.dart';
 
@@ -16,36 +16,47 @@ class SelectUserProfilePage extends StatefulWidget {
 
 class _SelectUserProfilePageState extends State<SelectUserProfilePage> {
   late int timeLoading;
-  Duration splashDuration = const Duration(seconds: 5);
+  Duration splashDuration = const Duration(seconds: 2);
   late Timer _timer;
   bool loading = true;
+  AppUser? _appUser;
   @override
   void initState() {
     super.initState();
-
+    _appUser = context.read<AppUserProvider>().appUser;
     _timer = Timer(splashDuration, _navigate);
   }
 
   void _navigate() {
-    final appUser = context.read<UserDatabase>().user;
-
-    if (appUser != null) {
-      switch (appUser.userType) {
-        case UserType.newUser:
-          setState(() {
-            loading = false;
-          });
-          break;
-        case UserType.monitor:
-          break;
-        case UserType.admin:
-          break;
-
-        case UserType.coordinator:
-          break;
+    if (_appUser != null) {
+      if (_appUser != null) {
+        switch (_appUser!.userType) {
+          case 'newUser':
+            setState(() {
+              loading = false;
+            });
+            break;
+          case 'coord':
+            Navigator.of(context).pushReplacementNamed('/home');
+            break;
+          case 'monitor':
+            Navigator.of(context).pushReplacementNamed('/home');
+            break;
+          case 'admin':
+            Navigator.of(context).pushReplacementNamed('/home');
+            break;
+          case 'schoolMember':
+            Navigator.of(context).pushReplacementNamed('/home');
+            break;
+          case 'tcb':
+            Navigator.of(context).pushReplacementNamed('/home');
+            break;
+          default:
+            Navigator.of(context).pushReplacementNamed('/login');
+        }
+      } else {
+        Messages.of(context).showError('Erro ao carregar usuário');
       }
-    } else {
-      Navigator.of(context).pushReplacementNamed('/login');
     }
   }
 

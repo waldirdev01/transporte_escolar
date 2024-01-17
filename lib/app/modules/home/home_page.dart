@@ -31,26 +31,14 @@ class HomePage extends StatelessWidget {
               icon: Icons.account_balance,
               text: 'Cadastrar Escola',
               onTap: () {
-                /* debugPrint('Cadastrar Escola Pressionado');
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const CreateSchoolScreen(),
-                  ),
-                );*/
+                Navigator.pushNamed(context, '/schoolcreate');
               },
             ),
             CustomCard(
               icon: Icons.list_alt,
               text: 'Todas as Escolas',
               onTap: () {
-                /* debugPrint('Todas as Escolas Pressionado');
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SchoolsList(),
-                  ),
-                );*/
+                Navigator.pushNamed(context, '/schoollist');
               },
             ),
             CustomCard(

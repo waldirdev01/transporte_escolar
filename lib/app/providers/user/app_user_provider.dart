@@ -54,8 +54,7 @@ class AppUserProvider extends ChangeNotifier {
     }
   }
 
-  Future<AppUser?> login(String email, String password) async {
-    isLoginButtonEnabled = false;
+  Future<void> login(String email, String password) async {
     final userCredential = await _firebaseAuth.signInWithEmailAndPassword(
       email: email,
       password: password,
@@ -65,16 +64,18 @@ class AppUserProvider extends ChangeNotifier {
           .collection('users')
           .doc(userCredential.user!.uid)
           .get();
+
       if (appUserData.exists) {
         _appUser = AppUser.fromJson(appUserData.data()!);
+        _isLoginButtonEnabled = true;
         notifyListeners();
       } else {
         _appUser = null;
       }
-
-      return _appUser;
     } catch (e) {
-      return null;
+      _appUser = null;
+      _isLoginButtonEnabled = true;
+      notifyListeners();
     }
   }
 

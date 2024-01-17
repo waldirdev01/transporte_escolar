@@ -40,10 +40,10 @@ class AppField extends StatelessWidget {
               isDense: true,
               labelText: label,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(20),
               ),
               errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(20),
                   borderSide: const BorderSide(color: Colors.red)),
               suffixIcon: suffixIcon ??
                   (obscureText == true

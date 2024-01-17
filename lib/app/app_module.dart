@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:transporte_escolar/app/app_widget.dart';
 import 'package:transporte_escolar/app/core/firebase_database/user_database/user_database.dart';
+import 'package:transporte_escolar/app/providers/school/school_provider.dart';
 import 'providers/user/app_user_provider.dart';
 
 class AppModule extends StatelessWidget {
@@ -24,6 +25,11 @@ class AppModule extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => UserDatabase(
             firebaseAuth: context.read(),
+            firebaseFirestore: context.read(),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SchoolProvider(
             firebaseFirestore: context.read(),
           ),
         ),

@@ -98,10 +98,10 @@ class _LoginPageState extends State<LoginPage> {
                                           color: context.primaryColor),
                                     ),
                                   ),
-                                  Selector<AppUserProvider, bool>(
-                                    builder: (context, isLoading, child) {
+                                  Consumer<AppUserProvider>(
+                                    builder: (context, provider, child) {
                                       return ElevatedButton(
-                                          onPressed: _login,
+                                          onPressed: () => _login(provider),
                                           style:
                                               context.elevatedButtonThemeCustom,
                                           child: Padding(
@@ -112,8 +112,6 @@ class _LoginPageState extends State<LoginPage> {
                                             ),
                                           ));
                                     },
-                                    selector: (context, provider) =>
-                                        provider.isLoginButtonEnabled,
                                   ),
                                 ],
                               )
@@ -170,14 +168,14 @@ class _LoginPageState extends State<LoginPage> {
         ));
   }
 
-  void _login() async {
+  void _login(AppUserProvider provider) async {
     final formValid = _formkey.currentState?.validate() ?? false;
     if (formValid) {
       final email = _emailEC.text;
       final password = _passwordEC.text;
       try {
-        final user =
-            await context.read<AppUserProvider>().login(email, password);
+        await provider.login(email, password);
+        final user = provider.appUser;
         if (user != null) {
           Navigator.of(context).pushReplacementNamed('/userrouteprofile');
         } else {
