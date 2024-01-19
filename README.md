@@ -1,6 +1,6 @@
 # transporte_escolar
 
-A new Flutter project.
+A new Flutter project for an app to Brasilian School
 
 ## Getting Started
 
