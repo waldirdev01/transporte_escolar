@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:transporte_escolar/app/providers/user/app_user_provider.dart';
 import '../../providers/school/school_provider.dart';
+import 'widgets/school_card_list.dart';
 
 class SchoolList extends StatelessWidget {
   const SchoolList({super.key});
@@ -11,10 +13,10 @@ class SchoolList extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Escolas'),
         ),
-        body: Consumer<SchoolProvider>(
-          builder: (context, provider, child) {
-            provider.getSchools();
-            if (provider.schools.isEmpty) {
+        body: Consumer2<SchoolProvider, AppUserProvider>(
+          builder: (context, schoolProvider, userProvider, child) {
+            schoolProvider.getSchools();
+            if (schoolProvider.schools.isEmpty) {
               return Container(
                 margin: const EdgeInsets.only(top: 100),
                 padding: const EdgeInsets.all(16),
@@ -37,19 +39,23 @@ class SchoolList extends StatelessWidget {
               );
             }
 
-            final schools = provider.schools;
+            final schools = schoolProvider.schools;
             return ListView.builder(
               itemCount: schools.length,
               itemBuilder: (context, index) {
                 final school = schools[index];
-                return ListTile(
-                  title: Text(school.name),
-                  subtitle: Text(school.phone),
-                  onTap: () {
-                    Navigator.pushNamed(context, '/schooldetails',
-                        arguments: school);
-                  },
-                );
+                return InkWell(
+                    child: SchoolCardList(
+                      school: school,
+                      schoolProvider: schoolProvider,
+                      userProvider: userProvider,
+                    ),
+                    onTap: () {
+                      Navigator.of(context).pushNamed(
+                        '/schooldetails',
+                        arguments: school,
+                      );
+                    });
               },
             );
           },

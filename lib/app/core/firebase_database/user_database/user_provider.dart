@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:transporte_escolar/app/models/app_user.dart';
 
-class UserDatabase extends ChangeNotifier {
+class UserProvider extends ChangeNotifier {
   final FirebaseAuth _auth;
   final FirebaseFirestore _db;
   AppUser? _appUser;
@@ -12,7 +12,7 @@ class UserDatabase extends ChangeNotifier {
   AppUser? get user => _appUser;
   String? get lastError => _lastError;
 
-  UserDatabase(
+  UserProvider(
       {FirebaseAuth? firebaseAuth, FirebaseFirestore? firebaseFirestore})
       : _auth = firebaseAuth ?? FirebaseAuth.instance,
         _db = firebaseFirestore ?? FirebaseFirestore.instance;

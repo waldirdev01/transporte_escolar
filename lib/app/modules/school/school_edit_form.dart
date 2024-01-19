@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:transporte_escolar/app/core/ui/messages.dart';
+import 'package:transporte_escolar/app/core/ui/theme_extensions.dart';
+import '../../models/school.dart';
 import '../../providers/school/school_provider.dart';
 
 class SchoolEditForm extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
-  SchoolEditForm({super.key});
-
-  void _submitForm() {}
+  SchoolEditForm({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final schoolEdit = ModalRoute.of(context)!.settings.arguments as School;
     return Scaffold(
         appBar: AppBar(title: const Text('Editar Escola')),
         body: Consumer<SchoolProvider>(builder: (context, provider, child) {
+          provider.getSchool(schoolEdit.id!);
           final school = provider.school;
           if (school != null) {
             return Form(
@@ -70,15 +74,28 @@ class SchoolEditForm extends StatelessWidget {
                     ),
                     const Divider(),
                     ElevatedButton(
-                      onPressed: provider.isLoading ? null : _submitForm,
-                      child: const Text('Salvar'),
+                      style: context.elevatedButtonThemeCustom,
+                      onPressed: provider.isLoading
+                          ? null
+                          : () {
+                              if (_formKey.currentState!.validate()) {
+                                _formKey.currentState!.save();
+                                provider.updateSchool(school: school);
+                                Messages.of(context)
+                                    .showInfo('Escola atualizada com sucesso');
+                                Navigator.of(context).pop();
+                              }
+                            },
+                      child: const Text('Salvar',
+                          style: TextStyle(fontSize: 20, color: Colors.white)),
                     ),
                   ],
                 ),
               ),
             );
           } else {
-            Messages.of(context).showError('Erro ao carregar escola');
+            const Text('Erro ao carregar escola',
+                style: TextStyle(color: Colors.red));
           }
           return const Center(child: CircularProgressIndicator());
         }));

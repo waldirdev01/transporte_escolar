@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../../../models/school.dart';
 
-class SchoolCard extends StatelessWidget {
+class SchoolCardForItineraryChange extends StatelessWidget {
   final School school;
   final bool selected;
   final VoidCallback? onAddPressed;
   final VoidCallback? onRemovePressed;
 
-  const SchoolCard({
+  const SchoolCardForItineraryChange({
     Key? key,
     required this.school,
     this.selected = false,

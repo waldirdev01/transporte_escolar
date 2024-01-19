@@ -4,6 +4,8 @@ import 'package:transporte_escolar/app/modules/auth/login/login_page.dart';
 import 'package:transporte_escolar/app/modules/auth/register/register_page.dart';
 import 'package:transporte_escolar/app/modules/home/home_page.dart';
 import 'package:transporte_escolar/app/modules/school/school_create_form.dart';
+import 'package:transporte_escolar/app/modules/school/school_details_page.dart';
+import 'package:transporte_escolar/app/modules/school/school_edit_form.dart';
 import 'package:transporte_escolar/app/modules/splash/splash_page.dart';
 import 'package:transporte_escolar/app/modules/users/new_users/new_user_page.dart';
 import 'package:transporte_escolar/app/modules/users/select_user_profile_page.dart';
@@ -36,6 +38,8 @@ class _AppWidgetState extends State<AppWidget> {
           '/newuser': (context) => const NewUserPage(),
           '/schoolcreate': (context) => const SchoolCreateForm(),
           '/schoollist': (context) => const SchoolList(),
+          '/schooledit': (context) => SchoolEditForm(),
+          '/schooldetails': (context) => const SchoolDetailsPage(),
         },
         home: const SplashPage());
   }

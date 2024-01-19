@@ -1,7 +1,8 @@
 class School {
-  String? id, appUserId;
+  String? id;
   List<String>? studentsId;
   List<String>? itineraiesId;
+  List<String>? appUserId;
   String name,
       phone,
       inep,
@@ -23,28 +24,29 @@ class School {
     required this.type,
     this.studentsId,
     this.appUserId,
-    List<String>? itineraiesId,
-  }) : itineraiesId = itineraiesId ?? [];
+    this.itineraiesId,
+  });
 
   factory School.fromJson(Map<String, dynamic> json) {
     return School(
-      id: json['id'],
-      name: json['name'],
-      phone: json['phone'],
-      inep: json['inep'],
-      principalName: json['principalName'],
-      principalRegister: json['principalRegister'],
-      secretaryName: json['secretaryName'],
-      secretaryRegister: json['secretaryRegister'],
-      type: json['type'],
-      studentsId: List<String>.from(
-        json['students'] ?? [],
-      ),
-      itineraiesId: List<String>.from(
-        json['itineraiesId'] ?? [],
-      ),
-      appUserId: json['appUserId'],
-    );
+        id: json['id'],
+        name: json['name'],
+        phone: json['phone'],
+        inep: json['inep'],
+        principalName: json['principalName'],
+        principalRegister: json['principalRegister'],
+        secretaryName: json['secretaryName'],
+        secretaryRegister: json['secretaryRegister'],
+        type: json['type'],
+        studentsId: List<String>.from(
+          json['students'] ?? [],
+        ),
+        itineraiesId: List<String>.from(
+          json['itineraiesId'] ?? [],
+        ),
+        appUserId: List<String>.from(
+          json['appUserId'] ?? [],
+        ));
   }
 
   Map<String, dynamic> toJson() {
