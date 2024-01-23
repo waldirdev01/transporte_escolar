@@ -26,4 +26,7 @@ extension ThemeExtensions on BuildContext {
           ),
         ),
       );
+  IconThemeData get iconThemeCustom => const IconThemeData(
+        color: Color.fromARGB(255, 241, 242, 240),
+      );
 }

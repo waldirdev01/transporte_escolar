@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
               Navigator.of(context)
                   .pushNamedAndRemoveUntil('/login', (route) => false);
             },
-            icon: const Icon(Icons.exit_to_app),
+            icon: const Icon(Icons.exit_to_app, color: Colors.white),
           ),
         ],
       ),
@@ -46,25 +46,14 @@ class HomePage extends StatelessWidget {
               text: 'Cadastrar Itinerário',
               onTap: () {
                 debugPrint('Cadastrar Itinerário Pressionado');
-                /* Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const CreateItineraryScreen(),
-                  ),
-                );*/
+                Navigator.pushNamed(context, '/itinerarycreate');
               },
             ),
             CustomCard(
               icon: Icons.list_alt,
               text: 'Todos os Itinerários',
               onTap: () {
-                /*debugPrint('Todos os Itinerários Pressionado');
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ItineraryList(),
-                  ),
-                );*/
+                Navigator.pushNamed(context, '/itinerarieslist');
               },
             ),
             CustomCard(

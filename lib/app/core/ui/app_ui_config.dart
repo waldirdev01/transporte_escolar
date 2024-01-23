@@ -37,4 +37,10 @@ class AppUiConfig {
       ),
     );
   }
+
+  static IconThemeData iconThemeCustom() {
+    return const IconThemeData(
+      color: Color.fromARGB(255, 241, 242, 240),
+    );
+  }
 }

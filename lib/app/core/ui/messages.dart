@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:transporte_escolar/app/core/ui/theme_extensions.dart';
 
 class Messages {
   final BuildContext context;
@@ -10,7 +11,7 @@ class Messages {
   }
 
   void showInfo(String message) {
-    _showMessager(message, Colors.blue);
+    _showMessager(message, context.primaryColor);
   }
 
   void _showMessager(String message, Color color) {

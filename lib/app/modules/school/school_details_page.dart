@@ -17,7 +17,10 @@ class _SchoolDetailScreenState extends State<SchoolDetailsPage> {
     final school = ModalRoute.of(context)!.settings.arguments as School;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detalhes da Escola'),
+        title: const Text(
+          'Detalhes da Escola',
+        ),
+        iconTheme: context.iconThemeCustom,
       ),
       body: SingleChildScrollView(
         child: Container(

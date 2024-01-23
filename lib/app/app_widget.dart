@@ -3,6 +3,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:transporte_escolar/app/modules/auth/login/login_page.dart';
 import 'package:transporte_escolar/app/modules/auth/register/register_page.dart';
 import 'package:transporte_escolar/app/modules/home/home_page.dart';
+import 'package:transporte_escolar/app/modules/itineray/itineraies_list.dart';
+import 'package:transporte_escolar/app/modules/itineray/itinerary_create_form.dart';
+import 'package:transporte_escolar/app/modules/itineray/itinerary_edit_form.dart';
 import 'package:transporte_escolar/app/modules/school/school_create_form.dart';
 import 'package:transporte_escolar/app/modules/school/school_details_page.dart';
 import 'package:transporte_escolar/app/modules/school/school_edit_form.dart';
@@ -23,6 +26,7 @@ class _AppWidgetState extends State<AppWidget> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Transporte Escolar',
         theme: AppUiConfig.themeCustom,
         localizationsDelegates: const [
@@ -40,6 +44,9 @@ class _AppWidgetState extends State<AppWidget> {
           '/schoollist': (context) => const SchoolList(),
           '/schooledit': (context) => SchoolEditForm(),
           '/schooldetails': (context) => const SchoolDetailsPage(),
+          '/itinerarycreate': (context) => const ItineraryCreateForm(),
+          '/itinerarieslist': (context) => const ItineriesList(),
+          '/itineraryedit': (context) => const ItineraryEditForm(),
         },
         home: const SplashPage());
   }

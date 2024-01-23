@@ -16,7 +16,10 @@ class SchoolEditForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final schoolEdit = ModalRoute.of(context)!.settings.arguments as School;
     return Scaffold(
-        appBar: AppBar(title: const Text('Editar Escola')),
+        appBar: AppBar(
+          title: const Text('Editar Escola'),
+          iconTheme: context.iconThemeCustom,
+        ),
         body: Consumer<SchoolProvider>(builder: (context, provider, child) {
           provider.getSchool(schoolEdit.id!);
           final school = provider.school;

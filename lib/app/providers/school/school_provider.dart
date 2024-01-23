@@ -56,23 +56,27 @@ class SchoolProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> getSchools() async {
+  Future<List<School>> getSchools() async {
     try {
       final snapshot = await _firebaseFirestore.collection('schools').get();
       _schools = snapshot.docs.map((e) => School.fromJson(e.data())).toList();
-      notifyListeners();
+      return _schools;
     } catch (e) {
       errorMessage = e.toString();
+      return [];
     }
   }
 
   Future<void> updateSchool({required School school}) async {
+    _isLoading = true;
+    notifyListeners();
     try {
       await _firebaseFirestore
           .collection('schools')
           .doc(school.id)
           .update(school.toJson());
-      _isLoading = true;
+      _isLoading = false;
+
       notifyListeners();
     } catch (e) {
       errorMessage = e.toString();

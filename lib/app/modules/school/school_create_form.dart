@@ -60,17 +60,18 @@ class _SchoolCreateFormState extends State<SchoolCreateForm> {
             secretaryRegister: _secretaryRegisterEC.text,
             type: _typeSchool,
             studentsId: []);
-        await _schoolProvider.createSchool(school: school);
         setState(() {
           _isLoading = true;
         });
+        await _schoolProvider.createSchool(school: school);
+        Messages.of(context).showInfo('Escola criada com sucesso');
       } on FirebaseException catch (e) {
         Messages.of(context).showError('Erro ao criar escola $e');
       } finally {
         setState(() {
           _isLoading = false;
         });
-        Messages.of(context).showInfo('Escola criada com sucesso');
+
         setState(() {
           _inepEC.clear();
           _nameEC.clear();
@@ -87,7 +88,10 @@ class _SchoolCreateFormState extends State<SchoolCreateForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Adicionar Escola')),
+      appBar: AppBar(
+        title: const Text('Adicionar Escola'),
+        iconTheme: context.iconThemeCustom,
+      ),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
