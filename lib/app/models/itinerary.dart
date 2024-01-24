@@ -30,7 +30,7 @@ class Itinerary {
     this.appUserId,
     this.importantAnnotation,
     this.schoolIds,
-    List<String>? studentIds,
+    this.studentIds,
   });
 
   Map<String, dynamic> toJson() => {

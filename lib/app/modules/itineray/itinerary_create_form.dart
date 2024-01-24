@@ -22,11 +22,11 @@ class _ItineraryCreateFormState extends State<ItineraryCreateForm> {
   final _code = TextEditingController();
   final _vehiclePlate = TextEditingController();
   final _driverName = TextEditingController();
-  int _capacity = 0;
+  int? _capacity;
   final _driverLicence = TextEditingController();
   final _driverPhone = TextEditingController();
   String _shift = 'MATUTINO';
-  double _kilometer = 0;
+  double?_kilometer;
   final _kilometerEC = TextEditingController();
   final _capacityEC = TextEditingController();
   final _description = TextEditingController();
@@ -63,11 +63,11 @@ class _ItineraryCreateFormState extends State<ItineraryCreateForm> {
           code: _code.text,
           vehiclePlate: _vehiclePlate.text,
           driverName: _driverName.text,
-          capacity: _capacity,
+          capacity: _capacity ?? 0,
           driverLicence: _driverLicence.text,
           driverPhone: _driverPhone.text,
           shift: _shift,
-          kilometer: _kilometer,
+          kilometer: _kilometer ?? 0,
           description: _description.text,
           contract: _contract.text,
           importantAnnotation: _annotation.text,

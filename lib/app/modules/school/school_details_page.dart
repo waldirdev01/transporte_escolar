@@ -3,24 +3,32 @@ import 'package:transporte_escolar/app/core/ui/theme_extensions.dart';
 import 'package:transporte_escolar/app/core/widgets/app_logo.dart';
 import '../../models/school.dart';
 
-class SchoolDetailsPage extends StatefulWidget {
-  const SchoolDetailsPage({Key? key}) : super(key: key);
+class SchoolDetailsPage extends StatelessWidget {
+  const SchoolDetailsPage({super.key});
 
-  @override
-  State<SchoolDetailsPage> createState() => _SchoolDetailScreenState();
-}
-
-class _SchoolDetailScreenState extends State<SchoolDetailsPage> {
-  bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
     final school = ModalRoute.of(context)!.settings.arguments as School;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           'Detalhes da Escola',
         ),
         iconTheme: context.iconThemeCustom,
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: context.primaryColor,
+        onPressed: () {
+          Navigator.of(context).pushNamed(
+            '/itinerarieslist',
+            arguments: school,
+          );
+        },
+        label: const Text(
+          'Adicionar Itinerário à Escola',
+          style: TextStyle(color: Colors.white, fontSize: 16),
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -89,24 +97,19 @@ class _SchoolDetailScreenState extends State<SchoolDetailsPage> {
               const SizedBox(height: 32),
               ElevatedButton(
                 style: context.elevatedButtonThemeCustom,
-                onPressed: () {
-                  setState(() {
-                    _isLoading = true;
-                  });
-                },
+                onPressed: () {},
                 child: const Text('Adicionar Aluno',
                     style: TextStyle(color: Colors.white, fontSize: 20)),
               ),
               const SizedBox(),
               ElevatedButton(
                 style: context.elevatedButtonThemeCustom,
-                onPressed: _isLoading
-                    ? null
-                    : () {
-                        setState(() {
-                          _isLoading = true;
-                        });
-                      },
+                onPressed: () {
+                  Navigator.of(context).pushNamed(
+                    '/itinerariesBySchool',
+                    arguments: school,
+                  );
+                },
                 child: const Text('Ver itinerários da escola',
                     style: TextStyle(color: Colors.white, fontSize: 20)),
               ),

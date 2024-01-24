@@ -4,6 +4,7 @@ import 'package:transporte_escolar/app/modules/auth/login/login_page.dart';
 import 'package:transporte_escolar/app/modules/auth/register/register_page.dart';
 import 'package:transporte_escolar/app/modules/home/home_page.dart';
 import 'package:transporte_escolar/app/modules/itineray/itineraies_list.dart';
+import 'package:transporte_escolar/app/modules/itineray/itineraries_by_school.dart';
 import 'package:transporte_escolar/app/modules/itineray/itinerary_create_form.dart';
 import 'package:transporte_escolar/app/modules/itineray/itinerary_edit_form.dart';
 import 'package:transporte_escolar/app/modules/school/school_create_form.dart';
@@ -47,6 +48,7 @@ class _AppWidgetState extends State<AppWidget> {
           '/itinerarycreate': (context) => const ItineraryCreateForm(),
           '/itinerarieslist': (context) => const ItineriesList(),
           '/itineraryedit': (context) => const ItineraryEditForm(),
+          '/itinerariesBySchool': (context) => const ItinerariesBySchool(),
         },
         home: const SplashPage());
   }

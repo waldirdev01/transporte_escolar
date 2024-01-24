@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:transporte_escolar/app/core/ui/messages.dart';
+import 'package:transporte_escolar/app/core/ui/theme_extensions.dart';
 import 'package:transporte_escolar/app/providers/itinerary/itinerary_provider.dart';
 
 import '../../models/itinerary.dart';
@@ -203,8 +204,10 @@ class _ItineraryEditFormState extends State<ItineraryEditForm> {
                     ),
                     const SizedBox(height: 20),
                     ElevatedButton(
+                      style: context.elevatedButtonThemeCustom,
                       onPressed: () => _submitForm(itinerary, provider),
-                      child: const Text('Atualizar Itinerário'),
+                      child: const Text('Atualizar Itinerário',
+                          style: TextStyle(color: Colors.white, fontSize: 20)),
                     ),
                   ],
                 ),

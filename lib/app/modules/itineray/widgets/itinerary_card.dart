@@ -1,22 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:transporte_escolar/app/core/ui/messages.dart';
+import 'package:transporte_escolar/app/models/app_user.dart';
 import 'package:transporte_escolar/app/models/itinerary.dart';
+import 'package:transporte_escolar/app/models/school.dart';
+import 'package:transporte_escolar/app/providers/itinerary/itinerary_provider.dart';
+import 'package:transporte_escolar/app/providers/school/school_provider.dart';
+import 'package:transporte_escolar/app/providers/user/app_user_provider.dart';
 
 class ItineraryCard extends StatelessWidget {
-  const ItineraryCard(
-      {super.key,
-      required this.itinerary,
-      required this.edit,
-      required this.delete,
-      required this.navigator});
+  const ItineraryCard({
+    super.key,
+    required this.itinerary,
+    required this.itineraryProvider,
+    required this.appUserProvider,
+    this.schoolProvider,
+  });
   final Itinerary itinerary;
-  final Function()? edit;
-  final Function()? delete;
-  final Function()? navigator;
+  final ItineraryProvider itineraryProvider;
+  final AppUserProvider appUserProvider;
+  final SchoolProvider? schoolProvider;
 
   @override
   Widget build(BuildContext context) {
+    final school = ModalRoute.of(context)?.settings.arguments as School?;
+    print(school?.id);
+
     return InkWell(
-      onTap: navigator,
+      onTap: () {
+        Navigator.of(context).pushNamed(
+          '/itinerarydetail',
+          arguments: itinerary,
+        );
+      },
       child: Card(
         margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         elevation: 2,
@@ -28,43 +44,94 @@ class ItineraryCard extends StatelessWidget {
           title: Text(itinerary.code),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
-            children: [
-              IconButton(
-                onPressed: edit,
-                icon: const Icon(
-                  Icons.edit,
-                  color: Colors.deepPurple,
-                ),
-              ),
-              IconButton(
-                icon: const Icon(
-                  Icons.delete,
-                  color: Colors.red,
-                ),
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Excluir itinerário'),
-                        content: const Text(
-                            'Tem certeza que deseja excluir este itinerário?'),
-                        actions: <Widget>[
-                          TextButton(
-                            child: const Text('Cancelar'),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
+            children:
+                appUserProvider.appUser?.userType != UserType.admin.string &&
+                        school?.id != null
+                    ? [
+                        IconButton(
+                          onPressed: () async {
+                            await itineraryProvider.addSchoolToItinerary(
+                                itinerary.id!, school!.id!);
+                            await schoolProvider?.addItineraryToSchool(
+                                itinerary.id!, school.id!);
+
+                            // ignore: use_build_context_synchronously
+                            Messages.of(context).showInfo(
+                                'Itinerário ${itinerary.code} adicionado à escola ${school.name} com sucesso!');
+                            // ignore: use_build_context_synchronously
+                            Navigator.of(context).pop();
+                          },
+                          icon: const Icon(
+                            Icons.add,
+                            color: Colors.deepPurple,
                           ),
-                          TextButton(
-                              onPressed: delete, child: const Text('Excluir')),
-                        ],
-                      );
-                    },
-                  );
-                },
-              ),
-            ],
+                        ),
+                        IconButton(
+                          onPressed: () async {
+                            await itineraryProvider.removeSchoolFromItinerary(
+                                itinerary.id!, school!.id!);
+                            await schoolProvider?.removeItineraryFromSchool(
+                                itinerary.id!, school.id!);
+
+                            // ignore: use_build_context_synchronously
+                            Messages.of(context).showInfo(
+                                'Itinerário ${itinerary.code} removido da escola ${school.name} com sucesso!');
+                            // ignore: use_build_context_synchronously
+                            Navigator.of(context).pop();
+                          },
+                          icon: const Icon(
+                            Icons.remove,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ]
+                    : [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(
+                              '/itineraryedit',
+                              arguments: itinerary,
+                            );
+                          },
+                          icon: const Icon(
+                            Icons.edit,
+                            color: Colors.deepPurple,
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                          ),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Excluir itinerário'),
+                                  content: const Text(
+                                      'Tem certeza que deseja excluir este itinerário?'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: const Text('Cancelar'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    TextButton(
+                                        onPressed: () {
+                                          itineraryProvider.deleteitinerary(
+                                              itineraryId: itinerary.id!);
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text('Excluir')),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ],
           ),
         ),
       ),

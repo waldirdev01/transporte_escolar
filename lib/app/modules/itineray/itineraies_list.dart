@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:transporte_escolar/app/core/ui/theme_extensions.dart';
 import 'package:transporte_escolar/app/modules/itineray/widgets/itinerary_card.dart';
-
+import 'package:transporte_escolar/app/providers/user/app_user_provider.dart';
 import '../../models/itinerary.dart';
 import '../../providers/itinerary/itinerary_provider.dart';
 
@@ -20,7 +20,7 @@ class ItineriesList extends StatelessWidget {
         iconTheme: context.iconThemeCustom,
       ),
       body: FutureBuilder<List<Itinerary>>(
-        future: context.read<ItineraryProvider>().getitineraries(),
+        future: context.watch<ItineraryProvider>().getitineraries(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             // Caso esteja carregando os dados, você pode exibir um indicador de progresso.
@@ -43,14 +43,9 @@ class ItineriesList extends StatelessWidget {
               itemBuilder: (context, index) {
                 final itinerary = itineraries[index];
                 return ItineraryCard(
-                  itinerary: itinerary,
-                  edit: () {
-                    Navigator.pushNamed(context, '/itineraryedit',
-                        arguments: itinerary);
-                  },
-                  delete: () {},
-                  navigator: () {},
-                );
+                    itinerary: itinerary,
+                    itineraryProvider: context.read<ItineraryProvider>(),
+                    appUserProvider: context.read<AppUserProvider>());
               },
             );
           }

@@ -97,4 +97,35 @@ class ItineraryProvider extends ChangeNotifier {
       errorMessage = e.toString();
     }
   }
+
+  Future<List<Itinerary>> getItinerariesForSchool(String schoolId) async {
+    final QuerySnapshot<Map<String, dynamic>> querySnapshot =
+        await FirebaseFirestore.instance
+            .collection('itineraries')
+            .where('schoolIds', arrayContains: schoolId)
+            .get();
+    _itineraries = [];
+    notifyListeners();
+
+    for (final QueryDocumentSnapshot<Map<String, dynamic>> document
+        in querySnapshot.docs) {
+      _itineraries.add(Itinerary.fromJson(document.data()));
+      notifyListeners();
+    }
+
+    return _itineraries;
+  }
+
+  Future<void> addSchoolToItinerary(String itineraryId, String schoolId) async {
+    await _firebaseFirestore.collection('itineraries').doc(itineraryId).update({
+      'schoolIds': FieldValue.arrayUnion([schoolId])
+    });
+  }
+
+  Future<void> removeSchoolFromItinerary(
+      String itineraryId, String schoolId) async {
+    await _firebaseFirestore.collection('itineraries').doc(itineraryId).update({
+      'schoolIds': FieldValue.arrayRemove([schoolId])
+    });
+  }
 }

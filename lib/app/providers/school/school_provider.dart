@@ -92,4 +92,17 @@ class SchoolProvider extends ChangeNotifier {
       errorMessage = e.toString();
     }
   }
+
+  Future<void> addItineraryToSchool(String itineraryId, String schoolId) async {
+    await _firebaseFirestore.collection('schools').doc(schoolId).update({
+      'itineraiesId': FieldValue.arrayUnion([itineraryId])
+    });
+  }
+
+  Future<void> removeItineraryFromSchool(
+      String itineraryId, String schoolId) async {
+    await _firebaseFirestore.collection('schools').doc(schoolId).update({
+      'itineraiesId': FieldValue.arrayRemove([itineraryId])
+    });
+  }
 }
