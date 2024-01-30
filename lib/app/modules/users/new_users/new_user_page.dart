@@ -25,7 +25,11 @@ class NewUserPage extends StatelessWidget {
               const Text('Aguarde a aprovação do administrador.'),
               const SizedBox(height: 20),
               ElevatedButton(
-                  onPressed: () {}, child: const Text('Voltar ao login')),
+                  onPressed: () {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        '/login', (Route<dynamic> route) => false);
+                  },
+                  child: const Text('Voltar ao login')),
             ],
           ),
         ),

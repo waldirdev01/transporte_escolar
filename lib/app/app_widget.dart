@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:transporte_escolar/app/core/constants.dart';
 import 'package:transporte_escolar/app/modules/auth/login/login_page.dart';
 import 'package:transporte_escolar/app/modules/auth/register/register_page.dart';
 import 'package:transporte_escolar/app/modules/home/home_page.dart';
@@ -15,6 +16,9 @@ import 'package:transporte_escolar/app/modules/users/new_users/new_user_page.dar
 import 'package:transporte_escolar/app/modules/users/select_user_profile_page.dart';
 import 'core/ui/app_ui_config.dart';
 import 'modules/school/school_list.dart';
+import 'modules/users/admin/manager_user_type.dart';
+import 'modules/users/school_member/school_member_list.dart';
+import 'modules/users/school_member/schools_by_school_member.dart';
 
 class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
@@ -35,20 +39,28 @@ class _AppWidgetState extends State<AppWidget> {
           GlobalWidgetsLocalizations.delegate
         ],
         routes: {
-          '/splash': (context) => const SplashPage(),
-          '/home': (context) => const HomePage(),
-          '/login': (context) => const LoginPage(),
-          '/register': (context) => const RegisterPage(),
-          '/userrouteprofile': (context) => const SelectUserProfilePage(),
-          '/newuser': (context) => const NewUserPage(),
-          '/schoolcreate': (context) => const SchoolCreateForm(),
-          '/schoollist': (context) => const SchoolList(),
-          '/schooledit': (context) => SchoolEditForm(),
-          '/schooldetails': (context) => const SchoolDetailsPage(),
-          '/itinerarycreate': (context) => const ItineraryCreateForm(),
-          '/itinerarieslist': (context) => const ItineriesList(),
-          '/itineraryedit': (context) => const ItineraryEditForm(),
-          '/itinerariesBySchool': (context) => const ItinerariesBySchool(),
+          Constants.splashRoute: (context) => const SplashPage(),
+          Constants.homeRoute: (context) => const HomePage(),
+          Constants.loginRoute: (context) => const LoginPage(),
+          Constants.registerRoute: (context) => const RegisterPage(),
+          Constants.userRouteProfile: (context) =>
+              const SelectUserProfilePage(),
+          Constants.newUserRoute: (context) => const NewUserPage(),
+          Constants.schoolCreateRoute: (context) => const SchoolCreateForm(),
+          Constants.schoolListRoute: (context) => const SchoolList(),
+          Constants.schoolEditRoute: (context) => SchoolEditForm(),
+          Constants.schoolDetailsRoute: (context) => const SchoolDetailsPage(),
+          Constants.itineraryCreateRoute: (context) =>
+              const ItineraryCreateForm(),
+          Constants.itinerariesListRoute: (context) => const ItineriesList(),
+          Constants.itineraryEditRoute: (context) => const ItineraryEditForm(),
+          Constants.itinerariesBySchoolRoute: (context) =>
+              const ItinerariesBySchool(),
+          Constants.schoolsBySchoolMemberRoute: (context) =>
+              const SchoolsBySchoolMember(),
+          Constants.managerUsersTypeRoute: (context) =>
+              const ManagerUsersType(),
+          Constants.schoolMembersList: (context) => const SchoolMembersList(),
         },
         home: const SplashPage());
   }

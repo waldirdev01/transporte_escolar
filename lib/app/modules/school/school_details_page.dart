@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:transporte_escolar/app/core/constants.dart';
+import 'package:transporte_escolar/app/core/ui/app_bar.dart';
 import 'package:transporte_escolar/app/core/ui/theme_extensions.dart';
 import 'package:transporte_escolar/app/core/widgets/app_logo.dart';
 import '../../models/school.dart';
@@ -11,12 +13,7 @@ class SchoolDetailsPage extends StatelessWidget {
     final school = ModalRoute.of(context)!.settings.arguments as School;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Detalhes da Escola',
-        ),
-        iconTheme: context.iconThemeCustom,
-      ),
+      appBar: const CustomAppBar(title: 'Dados da Escola'),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: context.primaryColor,
         onPressed: () {
@@ -111,6 +108,18 @@ class SchoolDetailsPage extends StatelessWidget {
                   );
                 },
                 child: const Text('Ver itinerários da escola',
+                    style: TextStyle(color: Colors.white, fontSize: 20)),
+              ),
+              const SizedBox(),
+              ElevatedButton(
+                style: context.elevatedButtonThemeCustom,
+                onPressed: () {
+                  Navigator.of(context).pushNamed(
+                    Constants.schoolMembersList,
+                    arguments: school,
+                  );
+                },
+                child: const Text('Adcionar Usuário à Escola',
                     style: TextStyle(color: Colors.white, fontSize: 20)),
               ),
             ],

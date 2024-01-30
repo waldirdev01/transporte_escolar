@@ -8,7 +8,6 @@ import 'package:validatorless/validatorless.dart';
 import '../../../core/ui/messages.dart';
 import '../../../core/validators/validators.dart';
 import '../../../core/widgets/app_field.dart';
-import '../../../models/app_user.dart';
 import '../../../providers/user/app_user_provider.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -139,7 +138,7 @@ class _RegisterPageState extends State<RegisterPage> {
             email: email,
             password: password,
             phone: phone,
-            userType: UserType.newUser.string);
+            userType: 'newUser');
         Messages.of(context).showInfo('Usuário cadastrado com sucesso!');
         Future.delayed(const Duration(seconds: 3));
         Navigator.of(context).pushNamedAndRemoveUntil(

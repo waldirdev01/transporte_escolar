@@ -7,6 +7,7 @@ import 'package:transporte_escolar/app/core/ui/theme_extensions.dart';
 import 'package:transporte_escolar/app/models/itinerary.dart';
 import 'package:transporte_escolar/app/models/school.dart';
 import 'package:transporte_escolar/app/providers/itinerary/itinerary_provider.dart';
+import 'package:transporte_escolar/app/providers/school/school_provider.dart';
 import 'package:transporte_escolar/app/providers/user/app_user_provider.dart';
 import 'widgets/itinerary_card.dart';
 
@@ -45,9 +46,11 @@ class ItinerariesBySchool extends StatelessWidget {
                   final itinerary = itineraries[index];
                   if (itinerary.schoolIds!.contains(school.id)) {
                     return ItineraryCard(
-                        itinerary: itinerary,
-                        itineraryProvider: context.read<ItineraryProvider>(),
-                        appUserProvider: context.read<AppUserProvider>());
+                      itinerary: itinerary,
+                      itineraryProvider: context.read<ItineraryProvider>(),
+                      appUserProvider: context.read<AppUserProvider>(),
+                      schoolProvider: context.read<SchoolProvider>(),
+                    );
                   } else {
                     return Column(
                       children: [

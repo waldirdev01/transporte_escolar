@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:transporte_escolar/app/core/ui/theme_extensions.dart';
-import '../../../models/app_user.dart';
 import '../../../models/school.dart';
 import '../../../providers/school/school_provider.dart';
 import '../../../providers/user/app_user_provider.dart';
@@ -27,7 +26,7 @@ class SchoolCardList extends StatelessWidget {
         subtitle: Text(school.phone),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
-          children: userProvider.appUser?.userType != UserType.admin.string
+          children: userProvider.appUser?.userType != 'admin'
               ? []
               : [
                   IconButton(

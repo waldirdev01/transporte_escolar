@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:transporte_escolar/app/core/constants.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -25,7 +26,7 @@ class _SplashPageState extends State<SplashPage> {
     setState(() {
       loading = false;
     });
-    Navigator.of(context).pushReplacementNamed('/login');
+    Navigator.of(context).pushReplacementNamed(Constants.loginRoute);
   }
 
   @override

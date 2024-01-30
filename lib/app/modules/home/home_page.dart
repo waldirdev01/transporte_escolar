@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:transporte_escolar/app/core/constants.dart';
 import '../../core/widgets/custom_card.dart';
 import '../../providers/user/app_user_provider.dart';
 
@@ -8,15 +9,17 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appUser = context.watch<AppUserProvider>().appUser;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('POLLO'),
+        title: const Text(Constants.comapanyName),
         actions: [
           IconButton(
             onPressed: () {
               context.read<AppUserProvider>().logout();
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil('/login', (route) => false);
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  Constants.loginRoute, (route) => false);
             },
             icon: const Icon(Icons.exit_to_app, color: Colors.white),
           ),
@@ -31,14 +34,14 @@ class HomePage extends StatelessWidget {
               icon: Icons.account_balance,
               text: 'Cadastrar Escola',
               onTap: () {
-                Navigator.pushNamed(context, '/schoolcreate');
+                Navigator.pushNamed(context, Constants.schoolCreateRoute);
               },
             ),
             CustomCard(
               icon: Icons.list_alt,
               text: 'Todas as Escolas',
               onTap: () {
-                Navigator.pushNamed(context, '/schoollist');
+                Navigator.pushNamed(context, Constants.schoolListRoute);
               },
             ),
             CustomCard(
@@ -46,14 +49,14 @@ class HomePage extends StatelessWidget {
               text: 'Cadastrar Itinerário',
               onTap: () {
                 debugPrint('Cadastrar Itinerário Pressionado');
-                Navigator.pushNamed(context, '/itinerarycreate');
+                Navigator.pushNamed(context, Constants.itineraryCreateRoute);
               },
             ),
             CustomCard(
               icon: Icons.list_alt,
               text: 'Todos os Itinerários',
               onTap: () {
-                Navigator.pushNamed(context, '/itinerarieslist');
+                Navigator.pushNamed(context, Constants.itinerariesListRoute);
               },
             ),
             CustomCard(
@@ -69,29 +72,17 @@ class HomePage extends StatelessWidget {
                 );*/
               },
             ),
-            CustomCard(
-              icon: Icons.group,
-              text: 'Novos usuários',
-              onTap: () {
-                /*debugPrint('Novos usuários Pressionado');
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const NewUsersList(),
-                  ),
-                );*/
-              },
-            ),
-            CustomCard(
-                icon: Icons.info,
-                text: 'Gerenciar Usuários',
-                onTap:
-                    () {} /*Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const AppUserList())),*/
-                ),
+            appUser?.userType != 'admin'
+                ? const SizedBox()
+                : CustomCard(
+                    icon: Icons.manage_accounts,
+                    text: 'Gerenciar Usuários',
+                    onTap: () => Navigator.pushNamed(
+                        context, Constants.managerUsersTypeRoute)),
           ],
         ),
       ),
     );
   }
 }
+// TODO parei em gerenciar usuários

@@ -14,6 +14,13 @@ class AppUserProvider extends ChangeNotifier {
   })  : _firebaseAuth = firebaseAuth,
         _firebaseFirestore = firebaseFirestore;
 
+  List<AppUser> _appUsers = [];
+  List<AppUser> get appUsers => _appUsers;
+  set appUsers(List<AppUser> value) {
+    _appUsers = value;
+    notifyListeners();
+  }
+
   AppUser? _appUser;
   AppUser? get appUser => _appUser;
   bool _isLoginButtonEnabled = true;
@@ -100,5 +107,41 @@ class AppUserProvider extends ChangeNotifier {
     await _firebaseAuth.signOut();
     _appUser = null;
     notifyListeners();
+  }
+
+  Future<List<AppUser>> getAppUsers() async {
+    try {
+      final snapshot = await _firebaseFirestore.collection('users').get();
+      _appUsers = snapshot.docs.map((e) => AppUser.fromJson(e.data())).toList();
+      return _appUsers;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  Future<void> updateUserType(
+      {required String appUserId, required String appUserType}) async {
+    try {
+      await _firebaseFirestore
+          .collection('users')
+          .doc(appUserId)
+          .update({'userType': appUserType});
+      notifyListeners();
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  Future<List<AppUser>> getAppUsersByType(String userType) async {
+    try {
+      final snapshot = await _firebaseFirestore
+          .collection('users')
+          .where('userType', isEqualTo: userType)
+          .get();
+      _appUsers = snapshot.docs.map((e) => AppUser.fromJson(e.data())).toList();
+      return _appUsers;
+    } catch (e) {
+      throw e.toString();
+    }
   }
 }

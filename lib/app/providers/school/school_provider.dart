@@ -97,12 +97,40 @@ class SchoolProvider extends ChangeNotifier {
     await _firebaseFirestore.collection('schools').doc(schoolId).update({
       'itineraiesId': FieldValue.arrayUnion([itineraryId])
     });
+    notifyListeners();
   }
 
   Future<void> removeItineraryFromSchool(
       String itineraryId, String schoolId) async {
     await _firebaseFirestore.collection('schools').doc(schoolId).update({
       'itineraiesId': FieldValue.arrayRemove([itineraryId])
+    });
+    notifyListeners();
+  }
+
+  Future<List<School>> getSchoolBySchoolMember(String schoolMemberId) async {
+    try {
+      final snapshot = await _firebaseFirestore
+          .collection('schools')
+          .where('appUserId', arrayContains: schoolMemberId)
+          .get();
+      _schools = snapshot.docs.map((e) => School.fromJson(e.data())).toList();
+      return _schools;
+    } catch (e) {
+      errorMessage = e.toString();
+      return [];
+    }
+  }
+
+  Future<void> addUserToSchool(String userId, String schoolId) async {
+    await _firebaseFirestore.collection('schools').doc(schoolId).update({
+      'appUserId': FieldValue.arrayUnion([userId])
+    });
+  }
+
+  Future<void> removeUserFromSchool(String userId, String schoolId) async {
+    await _firebaseFirestore.collection('schools').doc(schoolId).update({
+      'appUserId': FieldValue.arrayRemove([userId])
     });
   }
 }

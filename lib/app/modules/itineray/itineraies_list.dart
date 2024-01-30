@@ -5,6 +5,7 @@ import 'package:transporte_escolar/app/modules/itineray/widgets/itinerary_card.d
 import 'package:transporte_escolar/app/providers/user/app_user_provider.dart';
 import '../../models/itinerary.dart';
 import '../../providers/itinerary/itinerary_provider.dart';
+import '../../providers/school/school_provider.dart';
 
 class ItineriesList extends StatelessWidget {
   const ItineriesList({super.key});
@@ -45,7 +46,8 @@ class ItineriesList extends StatelessWidget {
                 return ItineraryCard(
                     itinerary: itinerary,
                     itineraryProvider: context.read<ItineraryProvider>(),
-                    appUserProvider: context.read<AppUserProvider>());
+                    appUserProvider: context.read<AppUserProvider>(),
+                    schoolProvider: context.read<SchoolProvider>());
               },
             );
           }

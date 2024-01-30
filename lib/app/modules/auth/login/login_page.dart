@@ -3,6 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:transporte_escolar/app/core/constants.dart';
 import 'package:transporte_escolar/app/core/ui/theme_extensions.dart';
 import 'package:transporte_escolar/app/core/widgets/app_field.dart';
 import 'package:transporte_escolar/app/core/widgets/app_logo.dart';
@@ -35,7 +36,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('POLLO', style: TextStyle(color: Colors.white)),
+          title: const Text(Constants.comapanyName,
+              style: TextStyle(color: Colors.white)),
         ),
         body: LayoutBuilder(
           builder: ((context, constraints) {
@@ -100,19 +102,20 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                   Consumer<AppUserProvider>(
                                     builder: (context, provider, child) {
-                                      return ElevatedButton(
-                                          onPressed: isLoading
-                                              ? null
-                                              : () => _login(provider),
-                                          style:
-                                              context.elevatedButtonThemeCustom,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(10.0),
-                                            child: Text(
-                                              'Login',
-                                              style: context.buttonText,
-                                            ),
-                                          ));
+                                      return isLoading
+                                          ? const SizedBox()
+                                          : ElevatedButton(
+                                              onPressed: () => _login(provider),
+                                              style: context
+                                                  .elevatedButtonThemeCustom,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Text(
+                                                  'Login',
+                                                  style: context.buttonText,
+                                                ),
+                                              ));
                                     },
                                   ),
                                 ],
@@ -186,7 +189,8 @@ class _LoginPageState extends State<LoginPage> {
         await provider.login(email, password);
         final user = provider.appUser;
         if (user != null) {
-          Navigator.of(context).pushReplacementNamed('/userrouteprofile');
+          Navigator.of(context)
+              .pushReplacementNamed(Constants.userRouteProfile);
         } else {
           Messages.of(context)
               .showError('Usuário ou senha inválidos ou não cadastrado');
@@ -197,5 +201,8 @@ class _LoginPageState extends State<LoginPage> {
         Messages.of(context).showError(e.toString());
       }
     }
+    setState(() {
+      isLoading = false;
+    });
   }
 }

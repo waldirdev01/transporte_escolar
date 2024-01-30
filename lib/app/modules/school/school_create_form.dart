@@ -51,15 +51,15 @@ class _SchoolCreateFormState extends State<SchoolCreateForm> {
     if (formValid) {
       try {
         final school = School(
-            name: _nameEC.text,
-            phone: _phoneEC.text,
-            inep: _inepEC.text,
-            principalName: _principalNameEC.text,
-            principalRegister: _principalRegisterEC.text,
-            secretaryName: _secretaryNameEC.text,
-            secretaryRegister: _secretaryRegisterEC.text,
-            type: _typeSchool,
-            studentsId: []);
+          name: _nameEC.text,
+          phone: _phoneEC.text,
+          inep: _inepEC.text,
+          principalName: _principalNameEC.text,
+          principalRegister: _principalRegisterEC.text,
+          secretaryName: _secretaryNameEC.text,
+          secretaryRegister: _secretaryRegisterEC.text,
+          type: _typeSchool,
+        );
         setState(() {
           _isLoading = true;
         });
@@ -123,37 +123,37 @@ class _SchoolCreateFormState extends State<SchoolCreateForm> {
                 height: 10,
               ),
               AppField(
-                label: 'nome do diretor',
+                label: 'nome do(a) diretor(a)',
                 controller: _principalNameEC,
-                validator:
-                    Validatorless.required('O nome do diretor é obrigatório'),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              AppField(
-                label: 'matrícula do diretor',
-                controller: _principalRegisterEC,
                 validator: Validatorless.required(
-                    'A matrícula do diretor é obrigatória'),
+                    'O nome do(a) diretor(a) é obrigatório'),
               ),
               const SizedBox(
                 height: 10,
               ),
               AppField(
-                label: 'nome do secretário',
+                label: 'matrícula do(a) diretor(a)',
+                controller: _principalRegisterEC,
+                validator:
+                    Validatorless.required('A matrícula do(a) é obrigatória'),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              AppField(
+                label: 'nome do(a) secretário(a0)',
                 controller: _secretaryNameEC,
                 validator: Validatorless.required(
-                    'O nome do secretário é obrigatório'),
+                    'O nome do(a) secretário(a) é obrigatório'),
               ),
               const SizedBox(
                 height: 10,
               ),
               AppField(
-                label: 'matrícula do secretário',
+                label: 'matrícula do(a) secretário(a)',
                 controller: _secretaryRegisterEC,
                 validator: Validatorless.required(
-                    'A matrícula do secretário é obrigatória'),
+                    'A matrícula do(a) secretário(a) é obrigatória'),
               ),
               const Divider(),
               DropdownButtonFormField<String>(

@@ -34,7 +34,9 @@ class AppModule extends StatelessWidget {
             firebaseFirestore: context.read(),
           ),
         ),
-        ChangeNotifierProvider(create: (context) => ItineraryProvider()),
+        ChangeNotifierProvider(
+            create: (context) =>
+                (ItineraryProvider(firebaseFirestore: context.read()))),
       ],
       child: const AppWidget(),
     );

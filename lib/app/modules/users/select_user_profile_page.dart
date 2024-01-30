@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:transporte_escolar/app/core/constants.dart';
 import 'package:transporte_escolar/app/core/ui/messages.dart';
 import 'package:transporte_escolar/app/models/app_user.dart';
 import 'package:transporte_escolar/app/providers/user/app_user_provider.dart';
@@ -37,22 +38,22 @@ class _SelectUserProfilePageState extends State<SelectUserProfilePage> {
             });
             break;
           case 'coord':
-            Navigator.of(context).pushReplacementNamed('/home');
+            Navigator.of(context).pushReplacementNamed(Constants.homeRoute);
             break;
           case 'monitor':
-            Navigator.of(context).pushReplacementNamed('/home');
+            Navigator.of(context).pushReplacementNamed(Constants.homeRoute);
             break;
           case 'admin':
-            Navigator.of(context).pushReplacementNamed('/home');
+            Navigator.of(context).pushReplacementNamed(Constants.homeRoute);
             break;
           case 'schoolMember':
-            Navigator.of(context).pushReplacementNamed('/home');
+            Navigator.of(context).pushReplacementNamed(Constants.homeRoute);
             break;
           case 'tcb':
-            Navigator.of(context).pushReplacementNamed('/home');
+            Navigator.of(context).pushReplacementNamed(Constants.homeRoute);
             break;
           default:
-            Navigator.of(context).pushReplacementNamed('/login');
+            Navigator.of(context).pushReplacementNamed(Constants.loginRoute);
         }
       } else {
         Messages.of(context).showError('Erro ao carregar usuário');
@@ -130,7 +131,8 @@ class _SelectUserProfilePageState extends State<SelectUserProfilePage> {
                   TextButton(
                       onPressed: () {
                         context.read<AppUserProvider>().logout();
-                        Navigator.of(context).pushReplacementNamed('/login');
+                        Navigator.of(context)
+                            .pushReplacementNamed(Constants.loginRoute);
                       },
                       child: const Text(
                         'SAIR',
